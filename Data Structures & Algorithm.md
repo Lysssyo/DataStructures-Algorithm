@@ -3955,119 +3955,59 @@ void HeapSort(SqList& L) {
 
 ​	![image-20231206225525976](Data Structures & Algorithm.assets/image-20231206225525976.png)
 
+> 上树称之为**归并树**，趟数为树的高度，整个归并排序仅需要**log~2~n**趟
+
+![image-20231207160001479](Data Structures & Algorithm.assets/image-20231207160001479.png)
+
+```c++
+	if(SR[i].key<=SR[j].key){
+        TR[k]=RS[i];
+        k++;
+        i++;        
+    }
+	else{
+        TR[k]=RS[j];
+        k++;
+        j++;
+    }        
+```
 
 
 
+**算法效率分析：**
 
+- 时间效率：O(nlong~2~n)
+- 空间效率：O(n)
 
+> 因为需要一个与原始序列同样大小的辅助序列 (R1)。这正是此算法的缺点。
+
+- 稳定性：稳定
 
 
 
 ### 8.6 基数排序
 
+​		基本思想：分配+收集
 
+​		也叫桶排序或箱排序：设置若干个箱子，将关键字为k的记录放入第k个箱子，然后在按序号将非空的连接。
 
+​		基数排序：数字是有范围的，均由0-9这十个数字组成，则只需设置十个箱子，相继按个、十、百...进行排序
 
+例：
 
+<img src="Data Structures & Algorithm.assets/image-20231207161356040.png" alt="image-20231207161356040" style="zoom:80%;" />
 
+<img src="Data Structures & Algorithm.assets/image-20231207161432659.png" alt="image-20231207161432659" style="zoom:80%;" />
 
+<img src="Data Structures & Algorithm.assets/image-20231207161512042.png" alt="image-20231207161512042" style="zoom:80%;" />
 
+**算法效率分析：**
 
+- 时间效率：O(k*(n+m))
 
+> k：关键字个数
+> m：关键字取值范围为m个值
 
+### 8.7 各种排序方法比较
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![image-20231207163243373](Data Structures & Algorithm.assets/image-20231207163243373.png)
