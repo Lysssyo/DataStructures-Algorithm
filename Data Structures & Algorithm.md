@@ -3517,9 +3517,9 @@ void InsertSort(SqList& L) {
 		if (L.r[i].key < L.r[i - 1].key) {
             //若小于，需要将L.r[i]插入有序子表，不小于，原来的位置就是应有的位置
 			L.r[0].key = L.r[i].key;//复制为哨兵
-			for (j = i - 1; L.r[j].key > L.r[i].key; j--)
+			for (j = i - 1; L.r[j].key > L.r[0].key; j--)
                 //使用哨兵，这里可以少比较一次，即不用判断是否j>=0
-				L.r[j + 1].key = L.r[j].key;
+				L.r[j + 1] = L.r[j];
 			L.r[j + 1] = L.r[0];//插入
 		}
 	}
