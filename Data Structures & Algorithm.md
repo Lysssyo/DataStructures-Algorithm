@@ -1213,7 +1213,7 @@ typedef struct TriTNode {
 - 先序遍历
 
 ```c++
-int PreOrderTraverse(BiTree T) {
+void PreOrderTraverse(BiTree T) {
 	if (T == NULL)return;
 	else {
 		visit(T);//访问根结点
@@ -1226,7 +1226,7 @@ int PreOrderTraverse(BiTree T) {
 - 中序遍历
 
 ```c++
-int InOrderTraverse(BiTree T) {
+void InOrderTraverse(BiTree T) {
 	if (T == NULL)return;
 	else {
 		InOrderTraverse(T->lchild);//递归遍历左子树
@@ -3721,18 +3721,18 @@ void BubbleSort(SqList& L) {
 ```c++
 //算法实现
 int Partition(SqList& L, int low, int high) {
-	L.r[0] = L.r[low];
-	int pivotkey = L.r[0].key;
+	L.r[0] = L.r[low];//子表的第一个元素放到哨兵位
+	int pivotkey = L.r[0].key;//选取第一个元素为中心
 	while (low < high) {
 		while (low<high && L.r[high].key>=pivotkey)
-			high--;
-		L.r[low] = L.r[high];
+			high--;//大于的话，就移动high指针，直到找到第一个小于的
+		L.r[low] = L.r[high];//找到小于的之后，就把小于的值赋值到前面
 		while (low<high && L.r[low].key<=pivotkey)
-			low++;
+			low++;//如果low指针指向的元素小于pivotkey，就移动low指针
 		L.r[high] = L.r[low];
 	}
-	L.r[low] = L.r[0];
-	return low;
+	L.r[low] = L.r[0];//最后high会与low相等，这个位置是哨兵要回到的位置
+	return low;//这个元素在整个表中都是排好了的
 }
 
 void QSort(SqList& L, int low, int high) {//对顺序表L进行快速排序
@@ -3940,8 +3940,6 @@ void HeapSort(SqList& L) {
 ![image-20231125195452218](Data Structures & Algorithm.assets/image-20231125195452218.png)
 
 
-
-![image-20231125153952075](Data Structures & Algorithm.assets/image-20231125153952075.png)
 
 ### 8.5 归并排序
 
