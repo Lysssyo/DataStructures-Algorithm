@@ -326,8 +326,8 @@ bool ListInsert(SqList & L,int i,ElemType e){
 删除第i个数据元素，移动 n - i 次
 
 ```c++
-bool ListDelete(SqList& L,int i){
-    if(i<1||i>L.length+1)
+bool ListDelete(SqList& L,int i){//删除第i个元素
+    if(i<1||i>L.length)
         return 0;//判断i值是否合法
     for(int j=i;j<=L.length-1;j++)
         L.elem[j-1]=L.elem[j];//插入位置以及之后的元素后移
@@ -352,7 +352,7 @@ Eg：已知一个长度为n的顺序表L，请写算法将表中所有值为item
 void Delete(SqList & L,int item){
     for(int i=0;i<L.length;i++){
         if(L.elem[i]==item){//查找值为item的数据元素
-            ListDelete(L,i+1);//删除第i+1个数据元素
+            ListDelete(L,i+1);//删除第i个数据元素
             i=i-1;
         }
     }
