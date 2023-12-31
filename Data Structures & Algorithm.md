@@ -74,7 +74,7 @@ Eg：
 
 - 有穷性
 
-  执行的步数有穷;每一步的执行时间有穷
+  执行的步数有穷；每一步的执行时间有穷
 
 - 确定性
 
@@ -229,7 +229,7 @@ L.length = 0;
 //初始化工作
 ```
 
-> `ElemType`: 数据元素的类型名，可以是简单数据类型或者自定义数据类型，例如，可以是int、double这些基本数据类型，也可以是book、stu这些自定义的数据类型.
+> `ElemType`: 数据元素的类型名，可以是简单数据类型或者自定义数据类型，例如，可以是int、double这些基本数据类型，也可以是book、stu这些自定义的数据类型。
 
 - 链式存储（链表）
 
@@ -294,9 +294,9 @@ int LocateElem(SqList L,ElemType e){
 ```c++
 bool ListInsert(SqList & L,int i,ElemType e){
     if(i<1||i>L.length+1)
-        return 0;
+        return 0;//插入的位置不合理，return 0
     if(L.length==MAXSIZE)
-        return 0;
+        return 0;//长度达到上限，return 0
     for(int j=L.length-1;j>=i-1;j--)
         L.elem[j+1]=L.elem[j];//插入位置以及之后的元素后移
     L.elem[i-1]=e;//将新元素e放入第i个位置
@@ -336,7 +336,7 @@ bool ListDelete(SqList& L,int i){
 }
 ```
 
-> 插入算法的时间复杂度
+> 删除算法的时间复杂度
 >
 > 算法时间主要耗费在移动元素的操作上
 >
@@ -347,27 +347,6 @@ bool ListDelete(SqList& L,int i){
 > <img src="Data Structures & Algorithm.assets\image-20230910155648885.png" alt="image-20230910155648885" style="zoom:67%;" />
 
 Eg：已知一个长度为n的顺序表L，请写算法将表中所有值为item的数据元素进行删除，要求算法的时间复杂度为0(n)、空间复杂度为0(1)
-
-```c++
-typedef struct
-{
-    int* elem;//顺序表的基地址
-    int length;//顺序表当前的长度
-}SqList;
-void Delete(SqList& L, int item) {
-    int i = 0; int j = L.length - 1;
-    while (i < j) {
-        while (i < j && L.elem[i] != item)i++;
-        while (i < j && L.elem[j] == item) { j--; L.length--; }
-        L.elem[i] = L.elem[j];
-        if(i!=j)L.length--;
-
-    }
-    if (L.elem[j] == item)L.length--;
-}
-```
-
-
 
 ```c++
 void Delete(SqList & L,int item){
@@ -3074,6 +3053,8 @@ BSTree SearchBST2(BSTree T, KeyType key) {
 
 
 
+
+
 ##### 比较次数
 
 二叉排序树上查找某关键字等于给定值的结点过程，**其实就是走了一条从根到该结点的路径。**
@@ -3958,16 +3939,39 @@ void HeapSort(SqList& L) {
 ![image-20231207160001479](Data Structures & Algorithm.assets/image-20231207160001479.png)
 
 ```c++
-	if(SR[i].key<=SR[j].key){
-        TR[k]=RS[i];
-        k++;
-        i++;        
-    }
-	else{
-        TR[k]=RS[j];
-        k++;
-        j++;
-    }        
+/*这个函数的作用是：
+*将A[low..mid] 和 A[mid+1...high]
+*这两段数据 进行合并排序 (卡牌算法) 
+*这里需要一个临时数组 来存放 A[] 
+*/
+void merge(ElemType A[],int low,int mid,int high){
+	//B里暂存A的数据 
+	for(int k = low ; k < high + 1 ; k++){
+		B[k] = A[k]; 
+	} 
+	/*这里对即将合并的两个数组 
+	*A[low..mid] 头元素 A[i]和 A[mid+1...high] 头元素  A[j] 
+	*进行一个头部的标记, 分别表示为数组片段的第一个元素 
+	*k 是目前插入位置。 
+	*/ 
+	int i = low , j = mid + 1 , k = low; 	
+	//只有在这种情况下 才不会越界 
+	while(i < mid + 1 && j < high + 1) {
+		//A的元素暂存在B里，因为不能再A上原地操作，会打乱数据
+		//这也是为什么二路归并排序(合并排序)空间复杂度是O(n)的原因 
+		//我们这里把值小的放在前面，最后排序结果就是从小到大 
+		if(B[i] > B[j]){
+			A[k++] = B[j++]; 
+		}else{
+			A[k++] = B[i++]; 
+		} 	 
+	} 
+	//循环结束后，会有一个没有遍历结束的数组段。
+	while(i < mid + 1) 
+		A[k++] = B[i++]; 
+	while(j < high + 1) 
+		A[k++] = B[j++]; 
+}
 ```
 
 
