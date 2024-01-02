@@ -3060,7 +3060,7 @@ typedef struct BSTNode {
 ```c++
 BSTree SearchBST(BSTree T, KeyType key) {
 	if ((!T) || key == T->data.key)
-		return T;
+		return T;//找到key或者树为空，return之
 	else if (key < T->data.key)
 		return SearchBST(T->lchild, key);//在左子树中找
 	else return SearchBST(T->rchild, key);//在右子树中找
@@ -3083,14 +3083,12 @@ BSTree SearchBST2(BSTree T, KeyType key) {
 
 
 
-
-
 ##### 比较次数
 
 二叉排序树上查找某关键字等于给定值的结点过程，**其实就是走了一条从根到该结点的路径。**
 
-> 比较关键字的次数==此结点所在层次数
-> 最多的比较次数==树的深度
+> 比较关键字的次数=此结点所在层次数
+> 最多的比较次数=树的深度
 
 ​											![image-20231119154658663](Data Structures & Algorithm.assets/image-20231119154658663.png)  
 
@@ -3397,7 +3395,7 @@ Hash(key)=key mod p
 - 线性探测法例：
 
 
-例:：关键码集为{47，7，29，11，16，92，22，8，3}，散列表的表长为m=11；散列函数为Hash(key)=key mod 11；拟用线性探测法处理冲突，建散列表如下:
+例:：关键码集为{47，7，29，11，16，92，22，8，3}，散列表的表长为m=11；散列函数为Hash(key)=key mod 11；拟用线性探测法处理冲突，建散列表如下：
 
 ![image-20231127163029962](Data Structures & Algorithm.assets/image-20231127163029962.png)
 
@@ -3468,7 +3466,7 @@ Hash(key)=key mod p
 > 基数排序: 不比较元素的大小，仅仅根据元素本身的取值确定其有序位置
 
 - 按辅助空间
-  - 原地排序和
+  - 原地排序
   - 非原地排序
 
 > <img src="Data Structures & Algorithm.assets/image-20231122160033415.png" alt="image-20231122160033415" style="zoom:67%;" />
