@@ -1316,6 +1316,8 @@ bool CreateBiTree(BiTree& T) {
 		T = new BiTNode;//为T分配一段内存，地址返回给T
 		if (!T)return 0;//分配失败，return 0
 		T->data = ch;//生成根结点
+        T->lchild=NULL;
+        T->rchild=NULL;
 		CreateBiTree(T->lchild);//构造左子树
 		CreateBiTree(T->rchild);//构造右子树
 	}
