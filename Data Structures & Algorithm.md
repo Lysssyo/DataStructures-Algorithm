@@ -1376,8 +1376,6 @@ int Depth(BiTree T) {
 
 ```c++
 int NodeConut(BiTree T) {
-	int m = 0;
-	int n = 0;
 	if (T == NULL)
 		return 0;//空树返回0
 	else {
