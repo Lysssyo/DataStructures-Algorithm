@@ -3554,7 +3554,7 @@ void InsertSort(SqList& L) {
 #### 折半插入排序
 
 ```c++
-void BlnsertSort(SqList& L) {
+void BInsertSort(SqList& L) {
 	for (int i = 2; i <= L.length; i++) {
 		L.r[0] = L.r[i];
 		int low = 1;
@@ -3852,8 +3852,7 @@ void SelectSort(SqList& L) {
 
 ```c++
 void HeapAdjust(SqList& L, int s, int m) {
-	//已知L.r[1].key......L.r[length].key中记录的关键字除L.r[1].key之外均满足堆的定义，
-	//本函数调整L.r[1]的关键字，使L.r[1].key......L.r[length].key成为一个小根堆
+	//本函数调整L.r[s]的关键字，使L.r[s].key......L.r[length].key成为一个小根堆
 	RedType rc = L.r[s];
 	for (int j = 2 * s; j <= m; j *= 2) {// 沿key较小的孩子结点向下筛选
 		if (j < m && L.r[j].key > L.r[j + 1].key)
@@ -3926,7 +3925,7 @@ void HeapSort(SqList& L) {
 >    for (int i = L.length / 2; i >= 1; i--)
 >        HeapAdjust(L, i, L.length);
 >    ```
->    在这一阶段，通过从最后一个非叶子节点开始，逐个调整为**大根堆**，实现了对数组的初始化建堆。这确保了整个数组满足堆的性质。
+>    在这一阶段，通过**从最后一个非叶子节点开始**，逐个调整为**大根堆**，实现了对数组的初始化建堆。这确保了整个数组满足堆的性质。
 >
 > 2. **排序阶段**：
 >    
@@ -4042,3 +4041,7 @@ void merge(ElemType A[],int low,int mid,int high){
 ### 8.7 各种排序方法比较
 
 ![image-20231207163243373](Data Structures & Algorithm.assets/image-20231207163243373.png)
+
+不稳定的排序：希尔排序、堆排序、选择排序、快速排序
+
+时间复杂度：**快排、堆排序、归并排序**优于**希尔排序**有序**冒泡、选择、直接插入**
