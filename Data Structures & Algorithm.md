@@ -222,7 +222,7 @@ typedef struct
     ElemType *elem;//数组的动态分配
     //顺序表的基地址
     int length;//顺序表当前的长度
-}SqList;    
+}SqList;
 SqList L; 
 L.elem = new ElemType[MAXSIZE]; 
 L.length = 0;
@@ -610,8 +610,6 @@ typedef struct DuLNode {
 
 
 
-
-
 ### 2.8 顺序表与链表的比较
 
 <img src="Data Structures & Algorithm.assets\image-20230914105352819.png" alt="image-20230914105352819" style="zoom:67%;" />
@@ -748,7 +746,7 @@ bool Pop(SqStack& S, SElemType& e) {
 
 ![image-20231017164438468](Data Structures & Algorithm.assets\image-20231017164438468.png)
 
-> 注意链栈中指针的方向
+> 注意链栈中指针的方向——栈顶指向栈底
 
 ```c++
 typedef struct StackNode {
@@ -888,7 +886,7 @@ typedef struct {
 bool InitQueue(LinkQueue& Q) {
 	Q.front = Q.rear = new QNode;//再内存中为空节点开辟一段空间，地址赋值给front与rear
 	if (!Q.front)return 0;
-	Q.front->next = NULL;//Q,front相当于指向链表头结点的指针
+	Q.front->next = NULL;//Q.front相当于指向链表头结点的指针
 	return 1;
 }
 ```
@@ -1011,15 +1009,11 @@ More：
 
 > 二叉树不是树的特殊情况，是两个不相同的概念
 >
-> 二叉树结点的子树要区分左子树和右子树，即使只有一棵子树世行区分，说明它是左子树，还是右子树。
+> 二叉树结点的子树要区分左子树和右子树，即使只有一棵子树也要区分，说明它是左子树，还是右子树。
 >
 > 树当结点只有一个孩子时，就无须区分它是左还是右的次序。
 >
 > 因此二者是不同的。这是二又树与树的最主要的差别。
-
-
-
-
 
 
 
@@ -1267,7 +1261,7 @@ bool InOrderTraverse(BiTree T) {
 		else {
 			Pop(S, q);//栈顶元素出栈
 			cout << q->data << " ";//输出栈顶元素（根结点）
-			p = q->rchild;
+			p = q->rchild;            
 		}
 	}
 	return 1;
@@ -1295,7 +1289,7 @@ bool InOrderTraverse(BiTree T) {
 ```c++
 bool LevelOrder(BiTree T) {
 	BiTree p;//声明一个二叉树的指针
-	SqQueue* qu;
+	SqQueue qu;
 	InitQueue(qu);//初始化队列
 	enQueue(qu, T->data);//根结点进入队列
 	while (!QueneEmpty(qu)) {//队列不为空
@@ -3836,7 +3830,7 @@ void HeapAdjust(SqList& L, int s, int m) {
 		s = j;// rc应插入在位置s上
 	}
 	L.r[s] = rc; // 插入
-}// HeapAdjust
+}//HeapAdjust
 ```
 
 - 堆的建立
@@ -3893,14 +3887,15 @@ void HeapSort(SqList& L) {
 > 这段代码实现的是堆排序算法。堆排序是一种高效的、基于比较的排序算法，它的主要思想是利用堆的性质进行排序。下面是这个算法的主要步骤和意义：
 >
 > 1. **Heapify 阶段**：
->    
+>
 >    ```c++
 >    for (int i = L.length / 2; i >= 1; i--)
 >        HeapAdjust(L, i, L.length);
 >    ```
 >    在这一阶段，通过从最后一个非叶子节点开始，逐个调整为**大根堆**，实现了对数组的初始化建堆。这确保了整个数组满足堆的性质。
->    
+>
 > 2. **排序阶段**：
+>    
 >    ```c++
 >    for (int i = L.length; i > 1; i--) {
 >        Swap(L); // 根与最后一个元素交换
